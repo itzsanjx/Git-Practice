@@ -1,0 +1,63 @@
+#!/bin/bash
+
+echo "Updating system..."
+sudo apt update && sudo apt upgrade -y
+
+echo "Installing core utilities..."
+sudo apt install -y \
+build-essential \
+curl \
+wget \
+git \
+vim \
+nano \
+htop \
+net-tools \
+iputils-ping \
+traceroute \
+rsync \
+unzip \
+zip \
+software-properties-common \
+ca-certificates \
+gnupg \
+lsb-release
+
+echo "Installing networking tools..."
+sudo apt install -y \
+openssh-server \
+tcpdump \
+nmap \
+dnsutils \
+iftop \
+ethtool
+
+echo "Installing disk & monitoring tools..."
+sudo apt install -y \
+lvm2 \
+parted \
+xfsprogs \
+smartmontools \
+iotop \
+sysstat
+
+echo "Installing security tools..."
+sudo apt install -y \
+ufw \
+fail2ban
+
+echo "Installing development tools..."
+sudo apt install -y \
+python3 \
+python3-pip \
+docker.io
+
+echo "Enabling services..."
+sudo systemctl enable --now ssh
+sudo systemctl enable --now docker
+
+echo "Adding user to docker group..."
+sudo usermod -aG docker $USER
+
+echo "Installation completed successfully!"
+echo "Please logout and login again for docker access."
